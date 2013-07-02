@@ -27,7 +27,7 @@ Soit `S(n)` le nombre de phrases qui correspondent aux n premiers caractères de
 
 - `S(n) = Somme des S(n - k)`, pour chaque cas où la chaine entre les positions `s-k` et `n` correspond à un mot du dictionnaire.
 
-La complexité de l'algorithme est O(n * k) avec n la longueur de la chaine en morse, et k la taille maximum d'un mot (en morse). Si on considère que k est une constante, donc la complexité est O(n).
+La complexité de l'algorithme est O(n * k) avec n la longueur de la chaine en morse, et k la taille maximum d'un mot (en morse). Si on considère que k est une constante, la complexité est O(n).
 
 Une fois la théorie trouvée et codée, il reste à faire passer les exemples, ce qui n'est pas une mince affaire. Le quatrième exemple proposé ne donne pas le bon résultat. La taille du jeu d'essai (une séquence de 10k caractères et 10k mots dans le dictionnaire) rend le débugage impossible, il faut constituer de nouveaux jeux d'essais. Je trouve la solution en reprenant l'exemple mentionné dans l'énoncé de l'exercice, où plusieurs mots ont la même représentation en morse. Après 2h15 d'effort, je soumets enfin mon code.
 

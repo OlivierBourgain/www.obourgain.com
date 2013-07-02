@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>ConvexHull</title>
+    <link rel="stylesheet" href="ConvexHull.css">
+  </head>
+  <body>
+    <a href="javascript:history.go(-1);return true;">back</a>
+    <h1>ConvexHull in Dart</h1>
+    
+    <p>Cette page illustre le calcul de l'<a href="http://fr.wikipedia.org/wiki/Enveloppe_convexe">enveloppe convexe</a> d'un ensemble de points pris au hasard.</p>
+    
+    <p><button id="start" >Calculer et afficher l'enveloppe convexe</button></p>
+    <p><button id="new" >Nouvelle liste de points</button></p>
+    
+    <div id="container">
+      <canvas id="canvas" width="800" height="400" class="center"></canvas>
+    </div>
+
+    <script type="application/dart" src="ConvexHull.dart"></script>
+    <script src="https://dart.googlecode.com/svn/branches/bleeding_edge/dart/client/dart.js"></script>
+  </body>
+</html>

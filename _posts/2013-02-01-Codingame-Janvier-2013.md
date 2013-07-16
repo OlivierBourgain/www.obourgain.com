@@ -1,5 +1,5 @@
 ---
-title: Participation au CodinGame de janvier 2013
+title: Codingame de janvier 2013
 layout: post
 tags: Codingame
 ---        

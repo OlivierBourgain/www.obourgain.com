@@ -1,7 +1,7 @@
 ---
 title: L'algorithme du lièvre et de la tortue
 layout: post
-tags: Algorithme java
+tags: Algorithme
 ---
 
 Comment déterminer si une liste chaînée contient un cycle ?
@@ -11,13 +11,13 @@ Comment déterminer si une liste chaînée contient un cycle ?
 Le principe de cet algorithme est le suivant : deux pointeurs parcourent la liste à des vitesses différentes. Le premier (la tortue) avant d'un élément à la fois. Le second (le lièvre) avance de deux éléments à chaque étape. Si le lièvre rattrape la tortue, alors la liste contient un cycle.
 
     Fonction existeCycle
-        tortue = root.next
-        lievre =  root.next.next
+        tortue := root.next
+        lievre :=  root.next.next
 
         tant que tortue <> lievre
             si lievre.next = null ou lievre.next.next = null alors retourne FAUX
-            tortue = tortue.next
-            lievre = lievre.next.next
+            tortue := tortue.next
+            lievre := lievre.next.next
 
         Retourne VRAI
 
@@ -26,13 +26,13 @@ Si λ est le nombre d'éléments dans le cycle, et μ le nombre d'éléments à 
 En complétant un peu l'algorithme, il est possible de déterminer les valeurs de λ et μ.
 
         Fonction calculeLambdaEtMu(root)
-           tortue = root.next
-           lievre =  root.next.next
+           tortue := root.next
+           lievre :=  root.next.next
 
            tant que tortue <> lievre
                si lievre.next = null ou lievre.next.next = null alors retourne "Pas de cycle"
-               tortue = tortue.next
-               lievre = lievre.next.next
+               tortue := tortue.next
+               lievre := lievre.next.next
 
            # A ce stade, on sait que x(i) = x(2 * i)
            # donc que i est un multiple de λ (mais on ne connait pas i).
@@ -48,18 +48,18 @@ En complétant un peu l'algorithme, il est possible de déterminer les valeurs d
            # tortue et le lièvre avancent d'un élément.
            # On a trouvé μ dès que la tortue et le lièvre sont sur le même noeud.
            μ = 0
-           tortue = root
+           tortue := root
            tant que tortue <> lievre
-               tortue = tortue.next
-               lievre = lievre.next
-               μ = μ + 1
+               tortue := tortue.next
+               lievre := lievre.next
+               μ := μ + 1
 
            # Enfin, on cherche la valeur de λ.
            # Pour cela, on fait parcourir le cycle au lièvre, sans bouger la tortue.
            λ = 0
            tant que tortue <> lievre
-               lievre = lievre.next
-               λ = λ + 1
+               lievre := lievre.next
+               λ := λ + 1
 
            retourne (μ, λ)
 

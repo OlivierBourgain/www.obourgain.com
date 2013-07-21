@@ -66,4 +66,4 @@ En complétant un peu l'algorithme, il est possible de déterminer les valeurs d
 
 La complexité est toujours de O(λ + μ).
 
-L'implementation en java est disponible sur github.
+L'implementation en java est disponible sur [github](https://github.com/OlivierBourgain/AlgoInJava/tree/master/src/com/obourgain/algo/tortoiseandhare).

@@ -87,3 +87,4 @@ Il faut utiliser une pile pour stocker la liste des opérations nécessaire, pui
 
         retourne resultat
 
+L'implémentation en java est disponible sur [github](https://github.com/OlivierBourgain/AlgoInJava/tree/master/src/com/obourgain/algo/threeandfive).

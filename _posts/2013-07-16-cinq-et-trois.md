@@ -1,7 +1,7 @@
 ---
 title: 23 = (1+3)*5+3
 layout: post
-tags: Algorithme interview
+tags: Algorithme Interview
 ---
 
 Un algorithme qui permet de calculer N en partant de 1, et en ne faisant que des multiplication par 5 et ajouter 3.

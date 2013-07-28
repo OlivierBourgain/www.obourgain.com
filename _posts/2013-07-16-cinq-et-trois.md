@@ -14,7 +14,9 @@ Cette [question](http://stackoverflow.com/questions/17652190/how-to-get-the-targ
 > Given a number N, starting with number 1, you can only multiply the result by 5 or add 3 to the result. If there's no way to get N through this method, return "Can't generate it".
 
 
-Dans un premier temps, j'ai cherché la solution la plus simple (même si elle n'est pas optimale).
+
+###Une première solution
+Il existe une solution assez simple (même si elle n'est pas optimale).
 
  1. Si `n = 1 mod 3`, il y a une solution évidente :  `n = 1 + 3 + 3 + ... + 3`.
  2. Si `n = 2 mod 3`, encore une fois, il y a une solution évidente : `n = 1 * 5 + 3 + 3 + ... + 3`.
@@ -77,7 +79,6 @@ Il faut utiliser une pile pour stocker la liste des opérations nécessaire, pui
         tant que pile p non vide faire
 
             operation = depile(p)
-
             si operation = "+3"
                resultat := resultat + " + 3"
             sinon

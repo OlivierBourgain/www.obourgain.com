@@ -1,6 +1,7 @@
 ---
 title: L'algorithme du lièvre et de la tortue
 layout: post
+tab: blog
 tags: Algorithme
 ---
 

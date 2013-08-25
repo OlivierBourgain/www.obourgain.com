@@ -1,6 +1,7 @@
 ---
-title: Coding game janvier 2013 - Problème 3.
+title: Coding game janvier 2013 - Problème 3
 layout: post
+tab: blog
 tags: Algorithme Codingame Programmation-dynamique
 ---
 Voici ma solution au problème *[La résistance](http://www.codingame.com/challenge_janvier_2013_question3)* qui était au programme du codingame de janvier.

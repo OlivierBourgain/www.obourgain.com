@@ -1,6 +1,7 @@
 ---
 title: Codingame de janvier 2013
 layout: post
+tab: blog
 tags: Codingame
 ---        
 

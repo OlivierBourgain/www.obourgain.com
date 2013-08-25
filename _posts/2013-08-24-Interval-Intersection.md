@@ -1,6 +1,7 @@
 ---
-title: Question pour entretien
+title: Nombre maximum d'intersections
 layout: post
+tab: blog
 tags: Algorithme Interview
 ---
 

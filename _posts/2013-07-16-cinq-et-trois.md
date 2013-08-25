@@ -1,10 +1,11 @@
 ---
 title: 23 = (1+3)*5+3
 layout: post
+tab: blog
 tags: Algorithme Interview
 ---
 
-Un algorithme qui permet de calculer N en partant de 1, et en ne faisant que des multiplication par 5 et ajouter 3.
+Ecrire un algorithme qui permet de calculer N en partant de 1, et en ne faisant que des multiplication par 5 et en ajoutant 3.
 Si c'est impossible, retourner "impossible".
 
 Cette [question](http://stackoverflow.com/questions/17652190/how-to-get-the-target-number-with-3-or-5-operations-without-recursion) est apparue récemment sur [StackOverflow](http://stackoverflow.com/).
@@ -40,7 +41,7 @@ Je n'ai pas de preuve que cet algorithme donne le résultat optimal, mais je n'a
 
      Fonction DecomposeRecursif(n)
         # Cas particuliers
-        si n = 2 ou n mod 3 = 0 alors retourne "Pas de décomposition"
+        si n = 2 ou n mod 3 = 0 alors retourne "Impossible"
 
         # Conditions d'arrêt de la récursion
         si n = 1 alors retourne "1"

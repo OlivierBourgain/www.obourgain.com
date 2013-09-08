@@ -3,6 +3,8 @@ description: ""
 
 url: "www.obourgain.com/blog/"
 baseurl: "www.obourgain.com/blog/"
+
+
 permalink: /blog/:year/:month/:day/:title.html
 
 paginate: 10

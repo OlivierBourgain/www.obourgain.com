@@ -106,4 +106,4 @@ Voici les principaux cycles que j'ai identifié :
 
 
 
-Le code correspondant à cet article est disponible sur [Github](https://github.com/OlivierBourgain/WikipediaPhilosophie).
+Le code correspondant à cet article est disponible sur [Github](https://github.com/OlivierBourgain/Wikiloop).

@@ -6,15 +6,15 @@ tags: Wikipedia
 ---
 
 Un article dans Wikipédia
-explique qu'en cliquant sur le premier wikilien du résumé introductif d'un article,
-et en répétant cette action sur chacun des articles visités ainsi, le parcours aboutit à l'article [philosophie](http://fr.wikipedia.org/wiki/Philosophie). J'ai testé cette affirmation.
+explique qu'en cliquant sur le premier wikilien d'un article,
+et en répétant cette action sur chacun des articles visités, le parcours aboutit à l'article [philosophie](http://fr.wikipedia.org/wiki/Philosophie). J'ai testé cette affirmation.
 
 
 
-####Tous les articles mènent à philosophie.
+###Tous les articles mènent à philosophie.
 
 Le fait est documenté sur Wikipedia en anglais ([Getting to Philosphy](http://en.wikipedia.org/wiki/Wikipedia:Getting_to_Philosophy)) depuis mai 2008.
-Cet article également sur Wikipedia France ([Se rendre à l'article philosophie](http://fr.wikipedia.org/wiki/Wikip%C3%A9dia:Se_rendre_%C3%A0_l'article_philosophie)).
+Cet article se trouve également sur Wikipedia France ([Se rendre à l'article philosophie](http://fr.wikipedia.org/wiki/Wikip%C3%A9dia:Se_rendre_%C3%A0_l'article_philosophie)).
 
 Les règles sont les suivantes :
 
@@ -25,7 +25,7 @@ Les règles sont les suivantes :
 Au 26 mai 2011, 94,52% des articles de wikipedia anglais mènent à philosophie.
 
 
-####Analyse de Wikipédia France
+###Analyse de Wikipédia France
 
 J'ai commencé par télécharger le contenu de Wikipédia France ([dump du 25/07/2013](http://dumps.wikimedia.org/frwiki/20130725/)).
 
@@ -40,13 +40,14 @@ par exemple `[[Page 1]]`. Le traitement est assez compliqué, car il y a de nomb
 La seconde étape consiste à calculer le cycle correspondant à chaque article.
 J'utilise pour cela l'[algorithme du lièvre et de la tortue](http://fr.wikipedia.org/wiki/Algorithme_du_li%C3%A8vre_et_de_la_tortue).
 
-####Résultats
+Au total, le traitement prend environ 1h30 sur mon MacBook.
 
-Le traitement prend environ 2h sur mon MacBook minutes, et calcule
-qu'au 25 juillet 2013, **85,3% des pages de Wikipédia France mènent vers Philosophie**.
+###Résultats
+
+Au 25 juillet 2013, **85,3% des pages de Wikipédia France mènent vers Philosophie**.
 
 
-Voici les principaux cycles que j'ai identifié :
+Voici les principaux cycles identifiés :
 
 <table class="table table-bordered table-stripped">
 <thead>

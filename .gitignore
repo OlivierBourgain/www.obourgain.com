@@ -2,3 +2,4 @@ _site/
 *.iml
 .htaccess
 _tmp/
+.DS*

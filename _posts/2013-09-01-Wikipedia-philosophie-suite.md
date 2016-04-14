@@ -5,7 +5,7 @@ tab: blog
 tags: Wikipedia  Application
 ---
 
-Nous avons vu [précédemment](/blog/2013/08/26/Wikipedia-philosophie.html) que 85% des articles de
+Nous avons vu [précédemment](/2013/08/26/Wikipedia-philosophie/) que 85% des articles de
 Wikipédia France menaient à la page Philosophie.
 
 Pour visualiser cela, j'ai développé une petite application, qui va lister toutes les pages rencontrées sur le chemin :

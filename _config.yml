@@ -2,13 +2,13 @@ name: "Olivier Bourgain"
 description: ""
 
 url: "www.obourgain.com/blog/"
-baseurl: "www.obourgain.com/blog/"
+baseurl: ""
 
 
 permalink: /blog/:year/:month/:day/:title.html
 
-paginate: 10
 
 markdown: rdiscount
 permalink: pretty
-pygments: true
+highlighter: pygments
+#paginate: 10

@@ -3,3 +3,5 @@ _site/
 .htaccess
 _tmp/
 .DS*
+.project
+.settings/

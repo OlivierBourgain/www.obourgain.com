@@ -4,7 +4,7 @@ layout: post
 tab: blog
 tags: Algorithme Codingame Programmation-dynamique
 ---
-Voici ma solution au problème *[La résistance](http://www.codingame.com/challenge_janvier_2013_question3)* qui était au programme du codingame de janvier.
+Voici ma solution au problème *[La résistance](https://www.codingame.com/ide/3964093eaa4c1648cc8745fcd9c9d06c3885fa)* qui était au programme du codingame de janvier.
 Cette question correspond au problème [1113](http://uva.onlinejudge.org/external/11/1113.html) sur [UVa online Judge](http://uva.onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&page=show_problem&problem=3554).
 
 En entrée du problème, nous avons une chaine en morse et un dictionnaire.

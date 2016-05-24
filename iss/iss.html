@@ -3,7 +3,7 @@
   <head>
   <meta charset="UTF-8">
     <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
-    <script src="https://maps.googleapis.com/maps/api/js" ></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDIanQUbKyftcfsesLQMjr0RQhHsj4JISI" ></script>
     <script src="./daynightoverlay.js"></script>
     <script src="./satellite.js" ></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
@@ -49,7 +49,7 @@
     
     <script>
     $(function() {
-        var mapDiv = $("#map");
+        var mapDiv = document.getElementById('map');
         var map = new google.maps.Map(mapDiv, {
             center: {lat: 0, lng: 0},
             zoom: 2

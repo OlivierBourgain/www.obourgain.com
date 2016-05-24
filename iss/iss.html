@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta charset="UTF-8">
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+    <script src="https://maps.googleapis.com/maps/api/js" ></script>
+    <script src="./daynightoverlay.js"></script>
+    <script src="./satellite.js" ></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+    <style>
+      #map {height: 600px;}
+    </style>
+  </head>
+  <body>
+    <div class="container">
+        <h1>Position de la station spatiale internationale</h1>
+        
+        <div class="row">
+            <div id="map" class="col-md-11"></div>
+            <div id="latlng" class="col-md-1">
+                <table>
+                    <tr><th>Long. :</th></tr>
+                    <tr><td id="longitude" /></tr>
+                    <tr><th>Latitude :</th></tr>
+                    <tr><td id="latitude" /></tr>
+                </table>
+            </div>
+        </div>
+        <div class="row"> <!-- comment ca marche -->
+                <h2>Comment ça marche ?</h2>
+                
+                Les positions des satellites et des stations spatiales est répertoriée sous le format TLE 
+                (<a href="https://fr.wikipedia.org/wiki/Param%C3%A8tres_orbitaux_%C3%A0_deux_lignes">Paramètres orbitaux à deux lignes sur wikipédia</a>). Le TLE de l'ISS ressemble à ceci:
+            <pre>
+                1 <b>25544</b>U 98067A   16141.64759851  .00004104  00000-0  67907-4 0  9990
+                2 <b>25544</b>  51.6426 195.4156 0001777 113.1277 355.8477 15.54656779   702</pre>
+                
+                Sur la première ligne, on retrouve l'identifiant de l'objet (25544 pour la station spatiale), 
+                un timestamp (16141.64..., indiquant ici le 141<sup>e</sup> jour de 2016, vers 16h UTC).
+                La seconde ligne reprend l'identifiant, suivi par les paramètres de l'orbite.
+                A noter que le TLE d'un satellites change lorsque l'orbite est modifié, par exemple lorsque l'altitude de l'ISS est "reboostée" pour compenser les frottements atmosphériques.
+
+            <p>Le TLE de l'ISS est récupéré à partir du site <a href="http://wheretheiss.at/w/developer">wheretheiss.at</a>. Puis, les coordonnées sont extraites avec la bibliothèque <a href="https://github.com/shashwatak/satellite-js">satellite.js</a>. L'affichage est fait avec l'<a href="https://developers.google.com/maps/documentation/javascript/">API Javascript</a> de Google Map.</p>
+        </div> <!-- comment ca marche -->
+    </div> <!--container-->
+    
+    
+    
+    <script>
+    $(function() {
+        var mapDiv = $("#map");
+        var map = new google.maps.Map(mapDiv, {
+            center: {lat: 0, lng: 0},
+            zoom: 2
+        });
+        new DayNightOverlay({
+            map: map
+        });
+
+        var tle1;
+        var tle2;
+
+        $.ajax({
+            url: "https://api.wheretheiss.at/v1/satellites/25544/tles",
+            success: function( result ) {
+                tle1 = result.line1;
+                tle2 = result.line2;
+                updateMap(map, tle1, tle2);
+            }
+        });
+    });
+
+    var marker = null;
+    
+    function displaymarker(map, satrec) {
+        var now = new Date();
+        var positionAndVelocity = satellite.propagate(satrec,now.getUTCFullYear(),now.getUTCMonth() + 1,now.getUTCDate(),now.getUTCHours(),now.getUTCMinutes(),now.getUTCSeconds());
+        var gmst = satellite.gstimeFromDate(now.getUTCFullYear(),now.getUTCMonth() + 1,now.getUTCDate(),now.getUTCHours(),now.getUTCMinutes(),now.getUTCSeconds());
+        var positionGd= satellite.eciToGeodetic(positionAndVelocity.position, gmst);         
+        var lat = satellite.degreesLat(positionGd.latitude);
+        var lng = satellite.degreesLong(positionGd.longitude);
+
+        $("#longitude").html(lng.toFixed(2)+ "°");
+        $("#latitude").html(lat.toFixed(2)+ "°");
+
+        if (marker) marker.setPosition(new google.maps.LatLng(lat,lng));
+        else marker = new google.maps.Marker({
+                position: new google.maps.LatLng(lat,lng),
+                map: map,
+                title:"The ISS"
+            });
+    }
+
+    function updateMap(map, tle1, tle2) {
+        console.log("TLE : " + tle1);
+        console.log("TLE : " + tle2);
+
+        var satrec = satellite.twoline2satrec(tle1, tle2);
+        displaymarker(map, satrec);
+        
+        // Update marker pos every second
+        window.setInterval(function(){
+            displaymarker(map, satrec);
+        }, 1000);            
+
+
+        // Creating a polyline with position of ISS every minute, for the past and next hour
+        var flightPlanCoordinates = [];
+        for(var i = -60; i < 60; i++) {
+            var date = new Date(new Date().getTime() + i*60000);
+            var positionAndVelocity = satellite.propagate(satrec,date.getUTCFullYear(),date.getUTCMonth() + 1,date.getUTCDate(),date.getUTCHours(),date.getUTCMinutes(),date.getUTCSeconds());
+            var gmst = satellite.gstimeFromDate(date.getUTCFullYear(),date.getUTCMonth() + 1,date.getUTCDate(),date.getUTCHours(),date.getUTCMinutes(),date.getUTCSeconds());
+            var positionGd= satellite.eciToGeodetic(positionAndVelocity.position, gmst);
+            var latLng = {lat: satellite.degreesLat(positionGd.latitude), lng: satellite.degreesLong(positionGd.longitude)};
+            flightPlanCoordinates.push(latLng);                  
+        }
+
+        var flightPath = new google.maps.Polyline({
+            path: flightPlanCoordinates,
+            geodesic: true,
+            strokeColor: 'Yellow',
+            strokeOpacity: 1.0,
+            strokeWeight: 2
+        });
+        flightPath.setMap(map); 
+    }
+    </script>
+
+  </body>
+</html>

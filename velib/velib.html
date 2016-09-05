@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<script src="https://code.jquery.com/jquery-2.2.4.min.js"	    integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="	crossorigin="anonymous"></script>
+<script src="http://code.jquery.com/ui/1.12.0/jquery-ui.min.js"	integrity="sha256-eGE6blurk5sHj+rmkfsGYeKyZx3M4bG+ZlFyA7Kns7E="	crossorigin="anonymous"></script>
+<script	src="https://maps.googleapis.com/maps/api/js?libraries=visualization&key=AIzaSyDIanQUbKyftcfsesLQMjr0RQhHsj4JISI"></script><!--  -->
+<script src="data.js"></script>
+<script src="velib.js"></script>
+
+<link rel="stylesheet"	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"	integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7"	crossorigin="anonymous">
+<link rel="stylesheet"	href="https://code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css">
+
+<style>
+#map {height: 800px;}
+#slider {margin:10px 0;}
+#speedradio{margin-left:10px}
+#stats{font-size:120%;font-weight:bold}
+</style>
+</head>
+<body>
+	<div class="container">
+		<h1>Où sont les velibs à Paris</h1>
+		<div class="row">
+			Le plan ci-dessous indique où se trouvent les
+			Velibs selon l'heure de la journée.
+		</div>
+		<div class="row">
+			<input type="button" value="Start" onclick="javascript:startslider()" />
+			<input type="button" value="Stop" onclick="javascript:stopslider()" />
+			<input type="button" value="Reset" onclick="javascript:resetslider()" />
+			<span id="speedradio">Vitesse: 
+			<input type="radio" name="speed" value="1"> Lent&nbsp;
+			<input type="radio" name="speed" value="3" checked="checked"> Moyen&nbsp;
+			<input type="radio" name="speed" value="10"> Rapide
+			</span>
+		</div>
+		<div class="row">
+		<div class="col-md-12">
+			<div id="slider" />
+		</div>
+		</div>
+	</div>
+	<div class="row" id="stats">
+		<div class="col-md-3"><span id="date" /></div>
+		<div class="col-md-3"><table><tr><td id="available" /><td>&nbsp;vélibs disponibles</td></tr></table></div>
+	</div>
+	<div class="row">
+		<div id="map" class="col-md-12"></div>
+	</div>
+		<!-- comment ca marche -->
+		<h2>Comment ça marche ?</h2>
+		<p>Les données ont été collectées entre le 1er et le 3 septembre via l'<a href="https://developer.jcdecaux.com/#/home">API opendata de JCDecaux</a>.
+		Le plan de Paris est fourni par <a href="https://developers.google.com/maps/">Google Maps</a>.
+		</p>
+		
+		<h2>Trivia</h2>
+		<p>En scannant les données disponibles, j'ai glané quelques informations plus ou moins intéressantes: 
+		<ul>
+		<li>Il y a 1221 stations vélibs, et au total 40002 emplacements</li>
+		<li>Il y a au moins 17328 vélibs disponibles dans Paris. C'est le nombre qui était visible le samedi 3 septembre vers 6h15.</li>
+		<li>Jeudi 1er septembre à 18h, on ne trouvait que 13014 vélibs disponibles, soit un taux d'utilisation d'environ 25%.</li>
+		<li>Les plus grandes stations ont 72 emplacements. Il y en a deux : <a href="http://www.velib.paris/Plan/Trouver-une-station?recherche=10004">10004 - Metz</a>
+		 (qui n'est pas à Metz, mais près de Strasbourg Saint Denis dans le 10ème arrondissement), et <a href="http://www.velib.paris/Plan/Trouver-une-station?recherche=18048">18048 - Porte de la Chapelle</a>.
+		</li>
+		<li>Les plus <em>petites</em> stations ont seulement 8 emplacements.
+		</li>
+		<li>Si vous voulez être sur de trouver un vélib, je vous conseille de déménager près de la station <a href="http://www.velib.paris/Plan/Trouver-une-station?recherche=16025">16025 - Fontaine Raynouard</a> 
+		(en face de la maison de la radio), ou de la station <a href=http://www.velib.paris/Plan/Trouver-une-station?recherche=15028">15028 - Dupleix</a>.
+		Les chiffres sont formels, c'est l'endroit où les vélibs se cachent.</li>
+		<li>Par contre, si vous habitez porte des Lilas, vous devrez vous contenter du métro. On y trouve les stations les moins achalandées en vélib:
+		 <a href="http://www.velib.paris/Plan/Trouver-une-station?recherche=20019">20019 - Maquis du Vercors</a> et <a href="http://www.velib.paris/Plan/Trouver-une-station?recherche=32604">32604 - Kock (Les Lilas)</a>. 
+		</ul>
+	</div>
+	<!-- comment ca marche -->
+	</div>
+	<!--container-->
+
+	<script>
+    $(function() {
+    	$( "#slider" ).slider({
+    		max:nb_snapshots - 1,
+    		slide: changeSnapshot,
+      		change: changeSnapshot
+    	});
+    	
+		function changeSnapshot() {
+			slidervalue = $("#slider").slider( "value" );
+			updatedata(slidervalue);
+		}  
+		function updatedata(i) {
+			$("#date").html(snapshot_time[i]);
+            $("#available").html(snapshot_total_avail[i]);
+			heatmap.setData(new google.maps.MVCArray(getPoints(i)));
+		}
+		
+        var mapDiv = document.getElementById('map');
+        var map = new google.maps.Map(mapDiv, {
+            center: {lat: 48.857593, lng: 2.34},
+            zoom: 13,
+            draggable: false,	
+            scrollwheel: false, 
+        });
+        
+        var heatmapdata = new google.maps.MVCArray(getPoints(0));
+        heatmap = new google.maps.visualization.HeatmapLayer({
+         	data: heatmapdata,
+        	map: map,
+            radius: 35
+        });
+        
+        $("#available").text(snapshot_total_avail[0]);
+        $("#date").text(snapshot_time[0]);
+        
+        $('input:radio[name=speed]').change(function () {
+        	var speedvalue = $('input:radio[name=speed]:checked').val();
+        	changespeed(speedvalue);
+        	console.log("Speed changed to " + speedvalue);
+        });
+    });
+
+
+    </script>
+
+</body>
+</html>

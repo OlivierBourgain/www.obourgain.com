@@ -4,19 +4,16 @@
 <meta charset="UTF-8">
 <script src="https://code.jquery.com/jquery-2.2.4.min.js"	    integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="	crossorigin="anonymous"></script>
 <script src="http://code.jquery.com/ui/1.12.0/jquery-ui.min.js"	integrity="sha256-eGE6blurk5sHj+rmkfsGYeKyZx3M4bG+ZlFyA7Kns7E="	crossorigin="anonymous"></script>
-<script	src="https://maps.googleapis.com/maps/api/js?libraries=visualization&key=AIzaSyDIanQUbKyftcfsesLQMjr0RQhHsj4JISI"></script><!--  -->
-<script src="data.js"></script>
+<!-- <script	src="https://maps.googleapis.com/maps/api/js?libraries=visualization"></script>
+ --><script src="https://maps.googleapis.com/maps/api/js?libraries=visualization&key=AIzaSyDIanQUbKyftcfsesLQMjr0RQhHsj4JISI"></script>
+
 <script src="velib.js"></script>
+<script src="data/data-20160912.js"></script>
 
 <link rel="stylesheet"	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"	integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7"	crossorigin="anonymous">
 <link rel="stylesheet"	href="https://code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css">
+<link rel="stylesheet"	href="velib.css">
 
-<style>
-#map {height: 800px;}
-#slider {margin:10px 0;}
-#speedradio{margin-left:10px}
-#stats{font-size:120%;font-weight:bold}
-</style>
 </head>
 <body>
 	<div class="container">
@@ -26,19 +23,23 @@
 			Velibs selon l'heure de la journée.
 		</div>
 		<div class="row">
-			<input type="button" value="Start" onclick="javascript:startslider()" />
-			<input type="button" value="Stop" onclick="javascript:stopslider()" />
-			<input type="button" value="Reset" onclick="javascript:resetslider()" />
-			<span id="speedradio">Vitesse: 
+			<select id="weekselect">
+				<option value="20160905">Du 05 au 11 septembre</option>
+				<option value="20160912" selected="selected">Du 12 au 19 septembre</option>
+			</select>			
+			<input id="btnstart" type="button" value="Start"  class="sliderbtn hspacer" />
+			<input id="btnstop"  type="button" value="Stop"   class="sliderbtn " />
+			<input id="btnreset" type="button" value="Reset"  class="sliderbtn " />
+			<span id="speedradio" class="hspacer">Vitesse: 
 			<input type="radio" name="speed" value="1"> Lent&nbsp;
 			<input type="radio" name="speed" value="3" checked="checked"> Moyen&nbsp;
 			<input type="radio" name="speed" value="10"> Rapide
 			</span>
 		</div>
 		<div class="row">
-		<div class="col-md-12">
-			<div id="slider" />
-		</div>
+			<div class="col-md-12">
+				<div id="slider" />
+			</div>
 		</div>
 	</div>
 	<div class="row" id="stats">
@@ -50,7 +51,7 @@
 	</div>
 		<!-- comment ca marche -->
 		<h2>Comment ça marche ?</h2>
-		<p>Les données ont été collectées entre le 1er et le 3 septembre via l'<a href="https://developer.jcdecaux.com/#/home">API opendata de JCDecaux</a>.
+		<p>Les données ont été collectées à partir du 1er septembre via l'<a href="https://developer.jcdecaux.com/#/home">API opendata de JCDecaux</a>.
 		Le plan de Paris est fourni par <a href="https://developers.google.com/maps/">Google Maps</a>.
 		</p>
 		
@@ -78,45 +79,7 @@
 
 	<script>
     $(function() {
-    	$( "#slider" ).slider({
-    		max:nb_snapshots - 1,
-    		slide: changeSnapshot,
-      		change: changeSnapshot
-    	});
-    	
-		function changeSnapshot() {
-			slidervalue = $("#slider").slider( "value" );
-			updatedata(slidervalue);
-		}  
-		function updatedata(i) {
-			$("#date").html(snapshot_time[i]);
-            $("#available").html(snapshot_total_avail[i]);
-			heatmap.setData(new google.maps.MVCArray(getPoints(i)));
-		}
-		
-        var mapDiv = document.getElementById('map');
-        var map = new google.maps.Map(mapDiv, {
-            center: {lat: 48.857593, lng: 2.34},
-            zoom: 13,
-            draggable: false,	
-            scrollwheel: false, 
-        });
-        
-        var heatmapdata = new google.maps.MVCArray(getPoints(0));
-        heatmap = new google.maps.visualization.HeatmapLayer({
-         	data: heatmapdata,
-        	map: map,
-            radius: 35
-        });
-        
-        $("#available").text(snapshot_total_avail[0]);
-        $("#date").text(snapshot_time[0]);
-        
-        $('input:radio[name=speed]').change(function () {
-        	var speedvalue = $('input:radio[name=speed]:checked').val();
-        	changespeed(speedvalue);
-        	console.log("Speed changed to " + speedvalue);
-        });
+ 		init();
     });
 
 

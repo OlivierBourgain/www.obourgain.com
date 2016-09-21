@@ -68,6 +68,30 @@ function init() {
 		var speedvalue = $('input:radio[name=speed]:checked').val();
 		changespeed(speedvalue);
 	});
+	
+	
+	var ctx = $("#chart");
+	var myLineChart = new Chart(ctx, {
+	    type: 'line',
+	    data: {
+	        labels: snapshot_time,
+	        datasets: [{
+	            label: 'Utilisation',
+	            data: snapshot_total_used,
+	            borderColor: "rgba(75,192,192,1)",
+	            pointRadius:0,
+	            pointHoverBorderWidth:5,
+	            pointHitRadius:8,
+	            fill:false,
+	        }]
+	    },
+	    options: {
+	        tooltips: {
+	        	titleFontSize:16,
+	        	bodyFontSize:16,
+	        }
+	    }
+	});
 }
 
 /** Fonctionnement du slider */

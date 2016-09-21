@@ -4,11 +4,15 @@
 <meta charset="UTF-8">
 <script src="https://code.jquery.com/jquery-2.2.4.min.js"	    integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="	crossorigin="anonymous"></script>
 <script src="http://code.jquery.com/ui/1.12.0/jquery-ui.min.js"	integrity="sha256-eGE6blurk5sHj+rmkfsGYeKyZx3M4bG+ZlFyA7Kns7E="	crossorigin="anonymous"></script>
-<!-- <script	src="https://maps.googleapis.com/maps/api/js?libraries=visualization"></script>
- --><script src="https://maps.googleapis.com/maps/api/js?libraries=visualization&key=AIzaSyDIanQUbKyftcfsesLQMjr0RQhHsj4JISI"></script>
+<script	src="https://maps.googleapis.com/maps/api/js?libraries=visualization"></script>
+ 
+<!-- <script src="https://maps.googleapis.com/maps/api/js?libraries=visualization&key=AIzaSyDIanQUbKyftcfsesLQMjr0RQhHsj4JISI"></script>
+ -->
+ 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.2.2/Chart.bundle.min.js"></script>
 
 <script src="velib.js"></script>
-<script src="data/data-20160912.js"></script>
+<script src="data/data-20160905small.js"></script>
 
 <link rel="stylesheet"	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"	integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7"	crossorigin="anonymous">
 <link rel="stylesheet"	href="https://code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css">
@@ -41,7 +45,6 @@
 				<div id="slider" />
 			</div>
 		</div>
-	</div>
 	<div class="row" id="stats">
 		<div class="col-md-3"><span id="date" /></div>
 		<div class="col-md-3"><table><tr><td id="available" /><td>&nbsp;vélibs disponibles</td></tr></table></div>
@@ -49,6 +52,10 @@
 	<div class="row">
 		<div id="map" class="col-md-12"></div>
 	</div>
+	<div class="row">
+		<canvas id="chart" width="900" height="300"></canvas>
+	</div>
+	<div class="row">
 		<!-- comment ca marche -->
 		<h2>Comment ça marche ?</h2>
 		<p>Les données ont été collectées à partir du 1er septembre via l'<a href="https://developer.jcdecaux.com/#/home">API opendata de JCDecaux</a>.
@@ -82,8 +89,10 @@
  		init();
     });
 
-
     </script>
+<script>
 
+
+</script>
 </body>
 </html>

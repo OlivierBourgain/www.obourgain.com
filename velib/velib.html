@@ -9,10 +9,12 @@
 <!-- <script src="https://maps.googleapis.com/maps/api/js?libraries=visualization&key=AIzaSyDIanQUbKyftcfsesLQMjr0RQhHsj4JISI"></script>
  -->
  
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.2.2/Chart.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.1/moment.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.1/locale/fr.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.2.2/Chart.min.js"></script>
 
 <script src="velib.js"></script>
-<script src="data/data-20160905small.js"></script>
+<script src="data/data-20160905.js"></script>
 
 <link rel="stylesheet"	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"	integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7"	crossorigin="anonymous">
 <link rel="stylesheet"	href="https://code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css">
@@ -52,26 +54,19 @@
 	<div class="row">
 		<div id="map" class="col-md-12"></div>
 	</div>
-	<div class="row">
+	<div class="row spacer">
+		<h2>Utilisation des vélibs</h2>
 		<canvas id="chart" width="900" height="300"></canvas>
 	</div>
 	<div class="row">
 		<!-- comment ca marche -->
-		<h2>Comment ça marche ?</h2>
-		<p>Les données ont été collectées à partir du 1er septembre via l'<a href="https://developer.jcdecaux.com/#/home">API opendata de JCDecaux</a>.
-		Le plan de Paris est fourni par <a href="https://developers.google.com/maps/">Google Maps</a>.
-		</p>
-		
 		<h2>Trivia</h2>
 		<p>En scannant les données disponibles, j'ai glané quelques informations plus ou moins intéressantes: 
 		<ul>
 		<li>Il y a 1221 stations vélibs, et au total 40002 emplacements</li>
-		<li>Il y a au moins 17328 vélibs disponibles dans Paris. C'est le nombre qui était visible le samedi 3 septembre vers 6h15.</li>
-		<li>Jeudi 1er septembre à 18h, on ne trouvait que 13014 vélibs disponibles, soit un taux d'utilisation d'environ 25%.</li>
+		<li>Il y a au moins 17577 velibs, dont plus de 4500 sont utilisés aux heures de pointes</li>
 		<li>Les plus grandes stations ont 72 emplacements. Il y en a deux : <a href="http://www.velib.paris/Plan/Trouver-une-station?recherche=10004">10004 - Metz</a>
-		 (qui n'est pas à Metz, mais près de Strasbourg Saint Denis dans le 10ème arrondissement), et <a href="http://www.velib.paris/Plan/Trouver-une-station?recherche=18048">18048 - Porte de la Chapelle</a>.
-		</li>
-		<li>Les plus <em>petites</em> stations ont seulement 8 emplacements.
+		 (qui n'est pas à Metz, mais près de Strasbourg Saint Denis dans le 10ème arrondissement), et <a href="http://www.velib.paris/Plan/Trouver-une-station?recherche=18048">18048 - Porte de la Chapelle</a>. Les plus petites stations ont seulement 8 emplacements.
 		</li>
 		<li>Si vous voulez être sur de trouver un vélib, je vous conseille de déménager près de la station <a href="http://www.velib.paris/Plan/Trouver-une-station?recherche=16025">16025 - Fontaine Raynouard</a> 
 		(en face de la maison de la radio), ou de la station <a href=http://www.velib.paris/Plan/Trouver-une-station?recherche=15028">15028 - Dupleix</a>.
@@ -79,6 +74,11 @@
 		<li>Par contre, si vous habitez porte des Lilas, vous devrez vous contenter du métro. On y trouve les stations les moins achalandées en vélib:
 		 <a href="http://www.velib.paris/Plan/Trouver-une-station?recherche=20019">20019 - Maquis du Vercors</a> et <a href="http://www.velib.paris/Plan/Trouver-une-station?recherche=32604">32604 - Kock (Les Lilas)</a>. 
 		</ul>
+		
+		<h2>Outils</h2>
+		<p>Les données ont été collectées à partir du 1er septembre via l'<a href="https://developer.jcdecaux.com/#/home">API opendata de JCDecaux</a>. Le graphe est réalisé avec <a href="http://www.chartjs.org/">ChartJs</a>.
+		Le plan de Paris est fourni par <a href="https://developers.google.com/maps/">Google Maps</a>.
+		</p>
 	</div>
 	<!-- comment ca marche -->
 	</div>

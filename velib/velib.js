@@ -26,7 +26,7 @@ function init() {
 				initdata();
 				heatmapdata = new google.maps.MVCArray(getPoints(0));
 				$("#available").text(snapshot_total_avail[0]);
-				$("#date").text(snapshot_time[0]);
+				$("#date").text(snapshot_timestr[0]);
 				$(".sliderbtn").prop("disabled",false);
 			},
 			cache : true,
@@ -62,7 +62,7 @@ function init() {
 	$("#btnstop ").click(function() {stopslider()});
 	$("#btnreset").click(function() {resetslider()});
 	$("#available").text(snapshot_total_avail[0]);
-	$("#date").text(snapshot_time[0]);
+	$("#date").text(snapshot_timestr[0]);
 
 	$('input:radio[name=speed]').change(function() {
 		var speedvalue = $('input:radio[name=speed]:checked').val();
@@ -89,6 +89,25 @@ function init() {
 	        tooltips: {
 	        	titleFontSize:16,
 	        	bodyFontSize:16,
+	        	callbacks: {
+	        		 title: function(tooltipItem, data) {
+	        	        	return moment(tooltipItem[0].xLabel).locale('fr').format('dddd DD/MM/YYYY HH:mm');	        	        
+	        	     },
+	        	}
+	        },
+	        legend: {
+	            display: false
+	        },
+	        scales: {
+	            xAxes: [{
+	                type: 'time',
+	                time: {
+	                	displayFormats: {
+	                        hour: 'DD/MM HH:mm',
+	                        day:  'DD/MM HH:mm'
+	                    }
+	                }
+	            }],
 	        }
 	    }
 	});
@@ -100,7 +119,7 @@ function sliderchanged() {
 	updatetick(slidervalue);
 }
 function updatetick(i) {
-	$("#date").html(snapshot_time[i]);
+	$("#date").html(snapshot_timestr[i]);
 	$("#available").html(snapshot_total_avail[i]);
 	heatmap.setData(new google.maps.MVCArray(getPoints(i)));
 }

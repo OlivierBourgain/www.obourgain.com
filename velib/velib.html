@@ -14,7 +14,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.2.2/Chart.min.js"></script>
 
 <script src="velib.js"></script>
-<script src="data/data-20160905.js"></script>
+<script src="data/data-20160919.js"></script>
 
 <link rel="stylesheet"	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"	integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7"	crossorigin="anonymous">
 <link rel="stylesheet"	href="https://code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css">
@@ -31,7 +31,8 @@
 		<div class="row">
 			<select id="weekselect">
 				<option value="20160905">Du 05 au 11 septembre</option>
-				<option value="20160912" selected="selected">Du 12 au 19 septembre</option>
+				<option value="20160912">Du 12 au 18 septembre</option>
+				<option value="20160919" selected="selected">Du 19 au 25 septembre</option>
 			</select>			
 			<input id="btnstart" type="button" value="Start"  class="sliderbtn hspacer" />
 			<input id="btnstop"  type="button" value="Stop"   class="sliderbtn " />
@@ -63,14 +64,14 @@
 		<h2>Trivia</h2>
 		<p>En scannant les données disponibles, j'ai glané quelques informations plus ou moins intéressantes: 
 		<ul>
-		<li>Il y a 1221 stations vélibs, et au total 40002 emplacements</li>
-		<li>Il y a au moins 17577 velibs, dont plus de 4500 sont utilisés aux heures de pointes</li>
+		<li>Il y a 1&nbsp;221 stations vélibs, et au total 40&nbsp;002 emplacements</li>
+		<li>Il y a environ 17&nbsp;500 velibs, dont plus de 4&nbsp;500 sont utilisés aux heures de pointes</li>
 		<li>Les plus grandes stations ont 72 emplacements. Il y en a deux : <a href="http://www.velib.paris/Plan/Trouver-une-station?recherche=10004">10004 - Metz</a>
 		 (qui n'est pas à Metz, mais près de Strasbourg Saint Denis dans le 10ème arrondissement), et <a href="http://www.velib.paris/Plan/Trouver-une-station?recherche=18048">18048 - Porte de la Chapelle</a>. Les plus petites stations ont seulement 8 emplacements.
 		</li>
 		<li>Si vous voulez être sur de trouver un vélib, je vous conseille de déménager près de la station <a href="http://www.velib.paris/Plan/Trouver-une-station?recherche=16025">16025 - Fontaine Raynouard</a> 
 		(en face de la maison de la radio), ou de la station <a href=http://www.velib.paris/Plan/Trouver-une-station?recherche=15028">15028 - Dupleix</a>.
-		Les chiffres sont formels, c'est l'endroit où les vélibs se cachent.</li>
+		Ces stations sont presques toujours pleines.</li>
 		<li>Par contre, si vous habitez porte des Lilas, vous devrez vous contenter du métro. On y trouve les stations les moins achalandées en vélib:
 		 <a href="http://www.velib.paris/Plan/Trouver-une-station?recherche=20019">20019 - Maquis du Vercors</a> et <a href="http://www.velib.paris/Plan/Trouver-une-station?recherche=32604">32604 - Kock (Les Lilas)</a>. 
 		</ul>

@@ -13,8 +13,13 @@ var bike_available;
 var lat;
 var lng;
 
+// Chart
+var myLineChart;
+
 function init() {
 	initdata();
+	
+	// Changement de semaine
 	$("#weekselect").change(function() {
 		slidervalue = 0;
 		resetslider();
@@ -28,18 +33,25 @@ function init() {
 				$("#available").text(snapshot_total_avail[0]);
 				$("#date").text(snapshot_timestr[0]);
 				$(".sliderbtn").prop("disabled",false);
+				myLineChart.destroy();
+				createChart();
 			},
 			cache : true,
 		});
 
 	});
 
+	// Initialisation du slider
 	$("#slider").slider({
 		max : nb_snapshots - 1,
 		slide : sliderchanged,
 		change : sliderchanged
 	});
-
+	$("#btnstart").click(function() {startslider()});
+	$("#btnstop ").click(function() {stopslider()});
+	$("#btnreset").click(function() {resetslider()});
+	
+	// Initialisation map
 	var mapDiv = document.getElementById('map');
 	var map = new google.maps.Map(mapDiv, {
 		center : {
@@ -58,9 +70,7 @@ function init() {
 		radius : 35
 	});
 
-	$("#btnstart").click(function() {startslider()});
-	$("#btnstop ").click(function() {stopslider()});
-	$("#btnreset").click(function() {resetslider()});
+
 	$("#available").text(snapshot_total_avail[0]);
 	$("#date").text(snapshot_timestr[0]);
 
@@ -69,9 +79,15 @@ function init() {
 		changespeed(speedvalue);
 	});
 	
-	
+	// Chart
+	createChart();
+}
+
+
+/** Creation du graphe */
+function createChart() {
 	var ctx = $("#chart");
-	var myLineChart = new Chart(ctx, {
+	myLineChart = new Chart(ctx, {
 	    type: 'line',
 	    data: {
 	        labels: snapshot_time,

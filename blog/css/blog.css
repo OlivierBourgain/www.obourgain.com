@@ -1,2 +1,4 @@
 .blogpost th, .blogpost td {width:250px; border:1px solid black; padding:0 30px}
-.blogpost .newcycle {	font-weight:bold}
+.blogpost .newcycle {	font-style:italic}
+.blogpost .pagechanged {	font-weight:bold}
+.blogpost .imgwikipedia {border:1px solid black; margin:10px; }

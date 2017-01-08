@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Où sont les velibs à Paris ?</title>
+<meta charset="UTF-8">
+<script   src="https://code.jquery.com/jquery-3.1.1.min.js"     integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+<script src="http://code.jquery.com/ui/1.12.0/jquery-ui.min.js"	integrity="sha256-eGE6blurk5sHj+rmkfsGYeKyZx3M4bG+ZlFyA7Kns7E="	crossorigin="anonymous"></script>
+
+<!-- <script	src="https://maps.googleapis.com/maps/api/js?libraries=visualization"></script> -->
+<script src="https://maps.googleapis.com/maps/api/js?libraries=visualization&key=AIzaSyDIanQUbKyftcfsesLQMjr0RQhHsj4JISI"></script>
+ 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.1/moment.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.1/locale/fr.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.2.2/Chart.min.js"></script>
+
+<link rel="stylesheet"	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"	integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7"	crossorigin="anonymous">
+<link rel="stylesheet"	href="https://code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css">
+<link rel="stylesheet"	href="velib.css">
+
+</head>
+<body>
+	<div class="container">
+		<h1>Activité Velib</h1>
+		<div class="row">
+			
+		</div>
+		
+	
+		<div class="row spacer">
+			<h2>Utilisation des vélibs</h2>
+			<canvas id="chart" width="900" height="300"></canvas>
+		</div>
+		<div class="row">
+			
+		</div>
+	</div>
+	<!--container-->
+
+	<script>
+    $(function() {
+    
+   		createChart();
+    
+ 		/** Creation du graphe */
+		function createChart() {
+			var ctx = $("#chart");
+			myLineChart = new Chart(ctx, {
+			    type: 'line',
+			    data: {
+			        labels: snapshot_time,
+			        datasets: [{
+			            label: 'Utilisation',
+			            data: snapshot_total_used,
+			            borderColor: "rgba(75,192,192,1)",
+			            pointRadius:0,
+			            pointHoverBorderWidth:5,
+			            pointHitRadius:8,
+			            fill:false,
+			        }]
+			    },
+			    options: {
+			        tooltips: {
+			        	titleFontSize:16,
+			        	bodyFontSize:16,
+			        	callbacks: {
+			        		 title: function(tooltipItem, data) {
+			        	        	return moment(tooltipItem[0].xLabel).locale('fr').format('dddd DD/MM/YYYY HH:mm');	        	        
+			        	     },
+			        	}
+			        },
+			        legend: {
+			            display: false
+			        },
+			        scales: {
+			            xAxes: [{
+			                type: 'time',
+			                time: {
+			                	displayFormats: {
+			                        hour: 'DD/MM HH:mm',
+			                        day:  'DD/MM HH:mm'
+			                    }
+			                }
+			            }],
+			        }
+			    }
+			});
+		}    
+	});
+
+    </script>
+</body>
+</html>
